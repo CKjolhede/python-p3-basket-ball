@@ -1,3 +1,7 @@
+import ipdb
+import statistics
+
+
 def game_dict():
     return {
         "home": {
@@ -182,3 +186,62 @@ def game_dict():
             ]
         }
     }
+home_players = game_dict()["home"]["players"]
+away_players = game_dict()["away"]["players"]
+players = home_players + away_players
+home_team = game_dict()["home"]
+away_team = game_dict()["away"]
+teams = [home_team, away_team]
+
+def num_points_per_game(name):
+    ppg_player = [player for player in players if player['name'] == name]
+    return ppg_player[0]['points_per_game']
+    
+def player_age(name):
+    age_player = [player for player in players if player['name'] == name]
+    return age_player[0]['age']
+
+def team_colors(name):
+    color_team = [team for team in teams if team["team_name"] == name]
+    return color_team[0]['colors']
+
+def team_names():
+    return [team["team_name"] for team in teams]
+
+def player_numbers(team):
+    numbers = []
+    team_obj = []
+    for t in teams:
+        if t["team_name"] == team:
+            team_obj.append(t)
+    for player in team_obj[0]["players"]:
+        numbers.append(player["number"])
+    return numbers 
+
+def player_stats(name):
+    return [player for player in players if player["name"] == name][0]
+
+
+def average_rebounds_by_shoe_brand():
+    # create list of all unique brands
+    # create list of player rebounds for each shoe brand
+    # calculate average for each brand 
+    rebound_list = {}
+    brands = {player["shoe_brand"] for player in players}
+    #ipdb.set_trace
+    for brand in brands:
+        rebounds = [player["rebounds_per_game"] for player in players if player['shoe_brand'] == brand]
+        ave_rebounds = (sum(rebounds)/len(rebounds))
+        rebound_list[brand] = ave_rebounds
+    for brand, rebounds in rebound_list.items():
+        print(f"{brand}: {rebounds}")
+        return
+    #for _ in rebound_list.items():
+    #    return {k: (sum[v]/len[v]) for k, v in rebound_list.items()}
+    #brand_rebound_hash = {}
+    #for brand in brands:
+    #    brand_rebound_hash[brand] = [player['rebounds'] for player in players if player["shoe_brand"] == brand]
+    #    ave_rebounds_hash = {sum(brand for brand in brand_hash)/len(brand)
+    #return [{brand: sum(rebounds)/len(rebounds) for brand in brands}]
+
+ipdb.set_trace()
