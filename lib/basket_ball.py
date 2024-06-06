@@ -223,19 +223,20 @@ def player_stats(name):
 
 
 def average_rebounds_by_shoe_brand():
+    answer = {"Nike":4.93,"Adidas":7.07,"Puma":8.50,"Jordan":3.80}
     # create list of all unique brands
     # create list of player rebounds for each shoe brand
     # calculate average for each brand 
     rebound_list = {}
     brands = {player["shoe_brand"] for player in players}
-    #ipdb.set_trace
     for brand in brands:
         rebounds = [player["rebounds_per_game"] for player in players if player['shoe_brand'] == brand]
         ave_rebounds = (sum(rebounds)/len(rebounds))
         rebound_list[brand] = ave_rebounds
     for brand, rebounds in rebound_list.items():
         print(f"{brand}: {rebounds}")
-        return
+    return
+    
     #for _ in rebound_list.items():
     #    return {k: (sum[v]/len[v]) for k, v in rebound_list.items()}
     #brand_rebound_hash = {}
@@ -244,4 +245,4 @@ def average_rebounds_by_shoe_brand():
     #    ave_rebounds_hash = {sum(brand for brand in brand_hash)/len(brand)
     #return [{brand: sum(rebounds)/len(rebounds) for brand in brands}]
 
-ipdb.set_trace()
+#ipdb.set_trace()
